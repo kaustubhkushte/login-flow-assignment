@@ -4,3 +4,4 @@ api/node_modules/
 api/coverage/
 web/node_modules/
 web/dist/
+.env*
