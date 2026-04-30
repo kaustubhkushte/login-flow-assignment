@@ -1,24 +1,32 @@
-//
-//  ContentView.swift
-//  LoginFLow
-//
-//  Created by Kaustubh Kushte on 30/04/26.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject private var sessionRouter: AppSessionRouter
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            AuthGradientBackground()
+                .ignoresSafeArea()
+
+            switch sessionRouter.state {
+            case .launching:
+                ProgressView("Checking session...")
+                    .tint(.white)
+                    .foregroundStyle(.white)
+            case .unauthenticated:
+                AuthFlowView()
+            case .authenticated(let user):
+                ProfileView(user: user)
+            }
         }
-        .padding()
+        .task {
+            await sessionRouter.bootstrap()
+        }
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(AppContainer.preview)
+        .environmentObject(AppContainer.preview.sessionRouter)
 }

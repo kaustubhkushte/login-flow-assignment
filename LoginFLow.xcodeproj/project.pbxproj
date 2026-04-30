@@ -10,6 +10,10 @@
 		488A8A922FA3287D002F175A /* LoginFLow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginFLow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXBuildFile section */
+		9A1B2C3D4E5F60718293A401 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9A1B2C3D4E5F60718293A402 /* Alamofire */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		488A8A942FA3287D002F175A /* LoginFLow */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A1B2C3D4E5F60718293A401 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = LoginFLow;
 			packageProductDependencies = (
+				9A1B2C3D4E5F60718293A402 /* Alamofire */,
 			);
 			productName = LoginFLow;
 			productReference = 488A8A922FA3287D002F175A /* LoginFLow.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = 488A8A892FA3287D002F175A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				9A1B2C3D4E5F60718293A403 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 488A8A932FA3287D002F175A /* Products */;
 			projectDirPath = "";
@@ -307,6 +316,25 @@
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9A1B2C3D4E5F60718293A403 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9A1B2C3D4E5F60718293A402 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9A1B2C3D4E5F60718293A403 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCConfigurationList section */
 		488A8A8D2FA3287D002F175A /* Build configuration list for PBXProject "LoginFLow" */ = {

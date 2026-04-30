@@ -67,3 +67,14 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 .DS_Store
+DerivedData/
+.swiftpm/
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+backend/api/node_modules/
+backend/api/coverage/
+backend/api/.env
+backend/web/node_modules/
+backend/web/dist/
+backend/web/.env
