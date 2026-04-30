@@ -2,6 +2,12 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+DerivedData/
+.swiftpm/
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+
 ## User settings
 xcuserdata/
 
@@ -60,3 +66,4 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+.DS_Store
