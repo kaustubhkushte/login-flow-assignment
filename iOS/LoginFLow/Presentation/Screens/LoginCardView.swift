@@ -31,12 +31,6 @@ struct LoginCardView: View {
                         .toggleStyle(.switch)
                         .font(.footnote)
                         .foregroundStyle(AppColors.mutedText)
-
-                    Spacer()
-
-                    Text("Secure login")
-                        .font(.footnote)
-                        .foregroundStyle(AppColors.mutedText)
                 }
 
                 Button("Forgot password?") {
