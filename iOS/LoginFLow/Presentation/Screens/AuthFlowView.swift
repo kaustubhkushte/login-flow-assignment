@@ -1,75 +1,114 @@
 import SwiftUI
 
-enum AuthMode: Equatable {
+enum AuthRoute: Equatable {
     case login
     case signup
+    case forgotPassword
 }
 
 struct AuthFlowView: View {
     @EnvironmentObject private var container: AppContainer
     @EnvironmentObject private var sessionRouter: AppSessionRouter
-    @State private var selectedMode: AuthMode = .login
+    @State private var route: AuthRoute = .login
 
     var body: some View {
         GeometryReader { geometry in
-            ScrollView {
-                VStack {
-                    if geometry.size.width > 900 {
-                        HStack(alignment: .center, spacing: 28) {
+            VStack {
+                Spacer(minLength: 16)
+
+                VStack(spacing: 24) {
+                    authHeader
+
+                    Group {
+                        switch route {
+                        case .login:
                             LoginCardView(
                                 viewModel: LoginViewModel(
                                     authService: container.authService,
                                     sessionRouter: sessionRouter
-                                )
+                                ),
+                                onShowSignUp: {
+                                    route = .signup
+                                },
+                                onForgotPassword: {
+                                    route = .forgotPassword
+                                }
                             )
-                            .frame(maxWidth: 300)
-
-                            AuthBrandPanel(selectedMode: selectedMode) { mode in
-                                selectedMode = mode
-                            }
-
+                        case .signup:
                             SignUpCardView(
                                 viewModel: SignUpViewModel(
                                     authService: container.authService,
                                     sessionRouter: sessionRouter
-                                )
-                            )
-                            .frame(maxWidth: 300)
-                        }
-                        .frame(maxWidth: .infinity, minHeight: geometry.size.height)
-                        .padding(40)
-                    } else {
-                        VStack(spacing: 24) {
-                            AuthBrandPanel(selectedMode: selectedMode) { mode in
-                                selectedMode = mode
-                            }
-
-                            Group {
-                                if selectedMode == .login {
-                                    LoginCardView(
-                                        viewModel: LoginViewModel(
-                                            authService: container.authService,
-                                            sessionRouter: sessionRouter
-                                        )
-                                    )
-                                } else {
-                                    SignUpCardView(
-                                        viewModel: SignUpViewModel(
-                                            authService: container.authService,
-                                            sessionRouter: sessionRouter
-                                        )
-                                    )
+                                ),
+                                onBackToLogin: {
+                                    route = .login
                                 }
+                            )
+                        case .forgotPassword:
+                            ForgotPasswordView {
+                                route = .login
                             }
-                            .frame(maxWidth: 420)
                         }
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 28)
-                        .frame(maxWidth: .infinity, minHeight: geometry.size.height)
                     }
                 }
+                .frame(maxWidth: min(geometry.size.width - 32, 430))
+                .padding(.horizontal, 16)
+
+                Spacer(minLength: 16)
             }
-            .scrollIndicators(.hidden)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
+
+    private var authHeader: some View {
+        VStack(spacing: 14) {
+            Image(systemName: "drop.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 48, height: 62)
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [AppColors.gradientTop, AppColors.accent],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+
+            Text("SentriNova")
+                .font(.system(size: 26, weight: .bold, design: .rounded))
+                .foregroundStyle(.white)
+
+            Text(headerTitle)
+                .font(.system(size: 34, weight: .bold, design: .rounded))
+                .foregroundStyle(.white)
+
+            Text(headerSubtitle)
+                .font(.subheadline)
+                .foregroundStyle(.white.opacity(0.88))
+                .multilineTextAlignment(.center)
+        }
+        .padding(.top, 8)
+    }
+
+    private var headerTitle: String {
+        switch route {
+        case .login:
+            return "Log In"
+        case .signup:
+            return "Create Account"
+        case .forgotPassword:
+            return "Forgot Password"
+        }
+    }
+
+    private var headerSubtitle: String {
+        switch route {
+        case .login:
+            return "Access your account with a clean mobile-first flow."
+        case .signup:
+            return "Set up a new account to continue."
+        case .forgotPassword:
+            return "Enter your email to continue with password recovery."
         }
     }
 }

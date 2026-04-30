@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct AuthBrandPanel: View {
-    let selectedMode: AuthMode
-    let onModeChange: (AuthMode) -> Void
+    let selectedMode: AuthRoute
+    let onModeChange: (AuthRoute) -> Void
 
     var body: some View {
         VStack(spacing: 18) {

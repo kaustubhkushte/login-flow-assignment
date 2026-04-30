@@ -2,35 +2,10 @@ import SwiftUI
 
 struct SignUpCardView: View {
     @StateObject var viewModel: SignUpViewModel
+    let onBackToLogin: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Hello,")
-                    .font(.headline)
-                    .foregroundStyle(.white.opacity(0.9))
-                Text("Sign Up!")
-                    .font(.system(size: 34, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white)
-            }
-            .padding(24)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(
-                ZStack(alignment: .topTrailing) {
-                    LinearGradient(
-                        colors: [AppColors.accentDark, AppColors.accent],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                    Circle()
-                        .fill(.white)
-                        .frame(width: 82, height: 82)
-                        .offset(x: 36, y: -36)
-                        .opacity(0.96)
-                }
-            )
-            .clipShape(RoundedRectangle(cornerRadius: 26, style: .continuous))
-
+        VStack(spacing: 20) {
             VStack(spacing: 16) {
                 if let generalError = viewModel.generalError {
                     ErrorBanner(message: generalError)
@@ -77,13 +52,23 @@ struct SignUpCardView: View {
                 }
                 .disabled(viewModel.isLoading)
                 .opacity(viewModel.isLoading ? 0.8 : 1)
+
+                HStack(spacing: 6) {
+                    Text("Already have an account?")
+                        .foregroundStyle(AppColors.mutedText)
+                    Button("Log In") {
+                        onBackToLogin()
+                    }
+                    .fontWeight(.semibold)
+                    .foregroundStyle(AppColors.accent)
+                }
+                .font(.footnote)
             }
-            .padding(.horizontal, 22)
-            .padding(.bottom, 26)
+            .padding(24)
         }
         .frame(maxWidth: .infinity)
         .background(AppColors.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-        .shadow(color: .black.opacity(0.12), radius: 24, x: 0, y: 16)
+        .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+        .shadow(color: .black.opacity(0.14), radius: 24, x: 0, y: 14)
     }
 }
