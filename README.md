@@ -41,6 +41,17 @@ flowchart TD
     C2 --> C21["src/"]
 ```
 
+## Demo screens
+
+The `docs/` folder contains example screenshots from the implemented iOS flow so reviewers can quickly see the app states and error handling coverage.
+
+| Screen | Preview | What it shows |
+| --- | --- | --- |
+| Forgot password | <img src="docs/forgot-password.png" alt="Forgot password screen" width="220" /> | Separate recovery screen from the login flow |
+| Invalid user | <img src="docs/invalid-user.png" alt="Invalid user state" width="220" /> | Authentication failure state for incorrect credentials |
+| Login error | <img src="docs/login-error.png" alt="Login error state" width="220" /> | Login form validation and backend error handling |
+| Signup error | <img src="docs/signup-error.png" alt="Signup error state" width="220" /> | Signup validation and duplicate/invalid input handling |
+
 ## Prerequisites
 
 Make sure these are installed before running the project:
